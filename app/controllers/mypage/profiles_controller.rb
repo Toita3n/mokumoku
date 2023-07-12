@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class Mypage::ProfilesController < Mypage::BaseController
-  def show
-    @user = current_user
-  end
+  before_action :set_user, only: %i[show update]
+  def show;end
 
   def update
-    @user = User.find(current_user.id)
     if @user.update(profile_params)
       redirect_to mypage_profile_path, success: 'プロフィールを更新しました'
     else
@@ -16,7 +14,15 @@ class Mypage::ProfilesController < Mypage::BaseController
 
   private
 
+  def set_user
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = User.find(current_user.id)
+    end
+  end
+
   def profile_params
-    params.require(:user).permit(:name, :avatar)
+    params.require(:user).permit(:name, :avatar, :email, :hobby, :profile)
   end
 end

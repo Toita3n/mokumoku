@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     @q = Event.future.ransack(params[:q])
     @events = @q.result(distinct: true).includes(:bookmarks, :prefecture, user: { avatar_attachment: :blob })
                 .order(created_at: :desc).page(params[:page])
+    @users = User.all
   end
 
   def future
@@ -42,6 +43,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def edit
