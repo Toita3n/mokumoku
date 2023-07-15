@@ -12,13 +12,10 @@ class User < ApplicationRecord
   has_many :notifications, foreign_key: :receiver_id, dependent: :destroy, inverse_of: :sender
   has_many :user_notification_timings, dependent: :destroy
   has_many :notification_timings, through: :user_notification_timings
-
   has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship",  dependent: :destroy
   has_many :following, through: :following_relationships
   has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :follower_relationships
-
-
   has_one_attached :avatar
 
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
@@ -91,7 +88,7 @@ class User < ApplicationRecord
   def follow(user)
     following_relationships.create!(following_id: user.id)
   end
-  
+
   def unfollow(user)
     following_relationships.find_by(following_id: user.id).destroy
   end

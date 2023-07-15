@@ -1,3 +1,1 @@
-<%= form_for(current_user, url: relationship_path(@user), method: :delete, remote: true) do |f| %>
-  <%= f.submit "フォローを外す", class: "btn btn-danger" %>
-<% end %>
+<%= link_to "フォローを外す", relationship_path(@user), method: :delete, remote: true, class: "btn btn-outline-secondary" %>

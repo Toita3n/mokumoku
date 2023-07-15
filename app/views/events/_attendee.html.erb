@@ -1,8 +1,8 @@
 <li>
   <div class="d-flex align-items-center gap-2 mb-3">
-   <%= link_to user_path(@event.user) do %>
-    <%= image_tag @event.user.decorate.avatar, class: 'rounded-circle avatar-lg'%>
-    <%= @event.user.name %>
+   <%= link_to user_path do %>
+    <%= image_tag attendee.decorate.avatar, class: 'rounded-circle avatar-md' %>
+    <%= attendee.name %>
    <% end %>
   </div>
 </li>
