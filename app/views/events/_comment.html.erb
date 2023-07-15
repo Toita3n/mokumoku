@@ -1,7 +1,9 @@
 <li>
   <div class="d-flex align-items-center gap-2 mb-3">
-    <%= image_tag comment.user.decorate.avatar, class: 'rounded-circle avatar-sm' %>
-    <%= comment.user.name %>
+   <%= link_to user_path(@event.user) do %>
+    <%= image_tag @event.user.decorate.avatar, class: 'rounded-circle avatar-lg'%>
+    <%= @event.user.name %>
+   <% end %>
   </div>
   <%= simple_format comment.content %>
   <div class="text-end">

@@ -11,3 +11,4 @@ import "theme.js"
 import "image_preview.js"
 Rails.start()
 ActiveStorage.start()
+require("jquery")

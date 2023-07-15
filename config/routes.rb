@@ -9,8 +9,13 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
-  resources :users, only: %i[new create show]
-  resources :follow_maps, only: %i[create destroy]
+  resources :users, only: %i[new create show update destroy] do
+    member do
+      get :following, :followers
+    end
+  end
+  resources :relationships, only: %i[create destroy ]
+
   resources :events do
     collection do
       get :future

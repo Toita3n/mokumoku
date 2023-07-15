@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+
   def show
     @user = User.find(params[:id])
   end
@@ -18,6 +19,18 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def following
+	    @user  = User.find(params[:id])
+	    @users = @user.following
+	    render 'show_follow'
+	end
+
+	def followers
+	    @user  = User.find(params[:id])
+	    @users = @user.followers
+	    render 'show_follower'
+	end
 
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation)
